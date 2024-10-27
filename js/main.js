@@ -34,7 +34,7 @@ const createComments = () => {
 
   for (let i = 0; i < numberOfComments; i++) {
     comments.push({
-      id: getRandomInt(1, COMMENTS_ID),
+      id: getRandomInt(1, COMMENTS_ID.MAX),
       avatar: `img/avatar-${getRandomInt(1, COUNT_AVATAR)}.svg`,
       message: `${pickRandomElement(COMMENT_MESSAGES)} ${Math.random() < 0.5 ? pickRandomElement(COMMENT_MESSAGES) : ''}`.trim(),
       name: pickRandomElement(USER_NAMES),
