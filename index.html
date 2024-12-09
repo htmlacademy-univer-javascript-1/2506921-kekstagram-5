@@ -30,7 +30,8 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" autocomplete="off">
+          <form class="img-upload__form" id="upload-select-image" autocomplete="off" method="post"
+          enctype="multipart/form-data" action="https://29.javascript.htmlacademy.pro/kekstagram">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
@@ -120,6 +121,8 @@
                   </div>
                   <div class="img-upload__field-wrapper">
                     <textarea class="text__description" name="description" placeholder="Ваш комментарий..."></textarea>
+                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." maxlength="140"
+                    maxlength-message="Комментарий не может быть длинее 140 символов"></textarea>
                   </div>
                 </fieldset>
 
@@ -231,6 +234,8 @@
   <script src="js/functions.js"></script>
   <script src="js/main.js"></script>
   <script src="functions.js"></script>
+  <script src="./vendor/pristine/pristine.min.js"></script>
+  <script src="./vendor/nouislider/nouislider.js"></script>
   <script type="module" src="main.js"></script>
 </body>
 </html>

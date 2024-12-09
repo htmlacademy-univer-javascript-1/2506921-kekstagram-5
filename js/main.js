@@ -2,3 +2,4 @@
 import './render.js';
 import './miniatures.js';
 import './full-picture.js';
+import './form.js';
