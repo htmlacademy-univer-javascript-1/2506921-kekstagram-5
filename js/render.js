@@ -25,4 +25,4 @@ photos.forEach((photo) => {
 
 photoContainer.appendChild(fragment);
 
-export {photos, photoContainer};
+export {photos, photoContainer, generatePhotoElement};
