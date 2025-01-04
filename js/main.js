@@ -1,16 +1,15 @@
 /* eslint-disable no-console */
-import './render.js';
-import './miniatures.js';
-import './full-picture.js';
-import './form.js';
-import { generatePhotoElement } from './render.js';
+import './gallery-filter.js';
+import './effects.js';
+import './base-form.js';
 import {loadData} from './api.js';
+import {renderMiniaturePictures} from './miniatures.js';
 
 let loadedPhotos = [];
 
 const onSuccess = (data) => {
   loadedPhotos = data.slice();
-  generatePhotoElement(loadedPhotos);
+  renderMiniaturePictures(loadedPhotos);
   const event = new CustomEvent('photosLoaded', { detail: loadedPhotos });
   document.dispatchEvent(event);
 };
