@@ -1,17 +1,36 @@
-const closeButton = document.querySelector('#picture-cancel');
-const fullPicture = document.querySelector('.big-picture');
+import { determineCommentEnding } from './util.js';
 
-const closeFullPicture = () => {
-  fullPicture.classList.add('hidden');
+const COMMENTS_STEP = 5;
+
+const elements = {
+  closeButton: document.querySelector('#picture-cancel'),
+  bigPicture: document.querySelector('.big-picture'),
+  bigPictureImg: document.querySelector('.big-picture__img img'),
+  likesCount: document.querySelector('.likes-count'),
+  commentsCount: document.querySelector('.comments-count'),
+  commentsLoader: document.querySelector('.comments-loader'),
+  socialCommentsList: document.querySelector('.social__comments'),
+  socialCaption: document.querySelector('.social__caption'),
+  commentCountBlock: document.querySelector('.social__comment-count'),
+};
+
+let commentsToRender = [];
+let shownCommentsCount = 0;
+
+function closeImagePreview() {
+  elements.bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-};
+  document.removeEventListener('keydown', handleEscPress);
+  commentsToRender = [];
+  shownCommentsCount = 0;
+}
 
-const closeOnEsc = (evt) => {
-  if (evt.key === 'Escape') {
-    closeFullPicture();
+function handleEscPress(event) {
+  if (event.key === 'Escape') {
+    closeImagePreview();
   }
-};
+}
 
-document.addEventListener('keydown', closeOnEsc);
-closeButton.addEventListener('click', closeFullPicture);
-export {closeOnEsc};
+elements.closeButton.addEventListener('click', closeImagePreview);
+elements.commentsLoader.addEventListener('click', updateCommentList);
+export { showImagePreview };
