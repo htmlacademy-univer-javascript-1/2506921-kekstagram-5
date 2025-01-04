@@ -31,6 +31,66 @@ function handleEscPress(event) {
   }
 }
 
+function generateCommentElement(comment) {
+  const listItem = document.createElement('li');
+  listItem.classList.add('social__comment');
+
+  const avatar = document.createElement('img');
+  avatar.classList.add('social__picture');
+  avatar.src = comment.avatar;
+  avatar.alt = comment.name;
+  avatar.width = 35;
+  avatar.height = 35;
+
+  const text = document.createElement('p');
+  text.classList.add('social__text');
+  text.textContent = comment.message;
+
+  listItem.appendChild(avatar);
+  listItem.appendChild(text);
+
+  return listItem;
+}
+
+function updateCommentList() {
+  const fragment = document.createDocumentFragment();
+  const newComments = commentsToRender.slice(shownCommentsCount, shownCommentsCount + COMMENTS_STEP);
+
+  newComments.forEach((comment) => {
+    const commentElement = generateCommentElement(comment);
+    fragment.appendChild(commentElement);
+  });
+
+  elements.socialCommentsList.appendChild(fragment);
+  shownCommentsCount += newComments.length;
+
+  elements.commentCountBlock.textContent = `${shownCommentsCount} из ${commentsToRender.length} ${determineCommentEnding(commentsToRender.length)}`;
+  if (shownCommentsCount >= commentsToRender.length || commentsToRender.length < COMMENTS_STEP) {
+    elements.commentsLoader.classList.add('hidden');
+  } else {
+    elements.commentsLoader.classList.remove('hidden');
+  }
+}
+
+function showImagePreview(photo) {
+  if (!photo) {
+    return;
+  }
+  elements.bigPictureImg.src = photo.url ?? '';
+  elements.bigPictureImg.alt = photo.description ?? '';
+  elements.likesCount.textContent = photo.likes ?? 0;
+  elements.commentsCount.textContent = photo.comments?.length ?? 0;
+  elements.socialCaption.textContent = photo.description;
+  elements.socialCommentsList.innerHTML = '';
+  commentsToRender = photo.comments;
+  shownCommentsCount = 0;
+  updateCommentList();
+  elements.commentCountBlock.classList.remove('hidden');
+  elements.bigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', handleEscPress);
+}
+
 elements.closeButton.addEventListener('click', closeImagePreview);
 elements.commentsLoader.addEventListener('click', updateCommentList);
 export { showImagePreview };
