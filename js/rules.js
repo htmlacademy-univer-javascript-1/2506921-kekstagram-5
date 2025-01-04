@@ -13,6 +13,7 @@ export const pristineValidator = new Pristine(form, {
   errorTextParent: 'img-upload__field-wrapper',
 });
 
+
 const isDescriptionValid = (value) => !value || value.length <= VALIDATION_RULES.MAX_COMMENT_LENGTH;
 
 const isHashtagsValidParts = (value) => {
