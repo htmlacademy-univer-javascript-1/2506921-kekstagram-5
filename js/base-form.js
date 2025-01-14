@@ -1,5 +1,6 @@
 import { form, pristineValidator, hashtagsInputElement, descriptionInputElement } from './rules.js';
 import { unloadData } from './api.js';
+import { isEscapeKeyPressed } from './util.js';
 
 const BASE_SCALE = 100;
 
@@ -7,12 +8,11 @@ const bodyElement = document.body;
 const imageInputElement = document.querySelector('.img-upload__input');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const cancelButtonElement = document.querySelector('.img-upload__cancel');
-export const uploadPreview = document.querySelector('.img-upload__preview img');
+const uploadPreview = document.querySelector('.img-upload__preview img');
 
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelContainerElement = document.querySelector('.img-upload__effect-level');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
-const isEscapeKeyPressed = (event) => event.key === 'Escape';
 const getMessageElement = () => document.querySelector('.success, .error');
 
 noUiSlider.create(effectLevelSliderElement, {
@@ -160,3 +160,5 @@ form.addEventListener('submit', async (event) => {
     submitButtonElement.disabled = false;
   }
 });
+
+export {uploadPreview};

@@ -1,5 +1,6 @@
-/* eslint-disable no-unused-vars */
 const DEFAULT_DELAY = 500;
+
+const isEscapeKeyPressed = (event) => event.key === 'Escape';
 
 const createDebouncedFunction = (callback, delay = DEFAULT_DELAY) => {
   let timeoutId;
@@ -26,3 +27,4 @@ const mixArrayElements = (elements) => {
 };
 
 export { createDebouncedFunction, determineCommentEnding, mixArrayElements };
+export { isEscapeKeyPressed };

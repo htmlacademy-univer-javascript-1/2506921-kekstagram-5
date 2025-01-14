@@ -1,4 +1,4 @@
-import { determineCommentEnding } from './util.js';
+import { determineCommentEnding, isEscapeKeyPressed } from './util.js';
 
 const COMMENTS_STEP = 5;
 
@@ -26,7 +26,7 @@ function closeImagePreview() {
 }
 
 function handleEscPress(event) {
-  if (event.key === 'Escape') {
+  if (isEscapeKeyPressed(event)) {
     closeImagePreview();
   }
 }

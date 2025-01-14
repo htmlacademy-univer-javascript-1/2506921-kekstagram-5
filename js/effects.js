@@ -16,6 +16,11 @@ const EFFECTS = {
   heat: { range: { min: 1, max: 3 }, start: 3, step: 0.1, unit: '', filter: 'brightness', hideSlider: false },
 };
 
+const SCALE_DIRECTIONS = {
+  SMALLER: 'smaller',
+  BIGGER: 'bigger',
+};
+
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
@@ -81,13 +86,13 @@ effectLevelSlider.noUiSlider.on('update', onEffectLevelUpdate);
 
 const updateScale = (direction) => {
   let currentScale = parseInt(scaleControlValue.value, 10);
-  if ((direction === 'smaller' && currentScale > SCALE.MIN) || (direction === 'bigger' && currentScale < SCALE.MAX)) {
-    currentScale += direction === 'smaller' ? -SCALE.STEP : SCALE.STEP;
+  if ((direction === SCALE_DIRECTIONS.SMALLER && currentScale > SCALE.MIN) || (direction === SCALE_DIRECTIONS.BIGGER && currentScale < SCALE.MAX)) {
+    currentScale += direction === SCALE_DIRECTIONS.SMALLER ? -SCALE.STEP : SCALE.STEP;
     setScale(currentScale);
   }
 };
 
-scaleControlSmaller.addEventListener('click', () => updateScale('smaller'));
-scaleControlBigger.addEventListener('click', () => updateScale('bigger'));
+scaleControlSmaller.addEventListener('click', () => updateScale(SCALE_DIRECTIONS.SMALLER));
+scaleControlBigger.addEventListener('click', () => updateScale(SCALE_DIRECTIONS.BIGGER));
 
 setScale(SCALE.BASE);
